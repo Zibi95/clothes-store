@@ -1,5 +1,7 @@
+import CategoriesContainer from './components/categories-container/CategoriesContainer';
+
 function App() {
-  return <h1>Hello world</h1>;
+  return <CategoriesContainer />;
 }
 
 export default App;
