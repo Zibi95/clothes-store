@@ -85,7 +85,7 @@ function SignUpForm() {
           type="password"
           required
         />
-        <Button>Sign Up</Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );
