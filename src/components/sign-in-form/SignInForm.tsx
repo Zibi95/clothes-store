@@ -1,13 +1,9 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 
-import FormInput from '../form-input/FormInput';
+import FormInput from '../UI/form-input/FormInput';
 import Button from '../UI/button/Button';
 import './sign-in-form-styles.scss';
-import {
-  signInWithGooglePopup,
-  createUserDocumentFromAuth,
-  signAuthUserWithEmailAndPassword,
-} from '../../services/firebase/firebase-utils';
+import { signInWithGooglePopup, signAuthUserWithEmailAndPassword } from '../../services/firebase/firebase-utils';
 
 const defaultFormInputs = {
   email: '',
@@ -16,6 +12,7 @@ const defaultFormInputs = {
 
 function SignInForm() {
   const [formInputs, setFormInputs] = useState(defaultFormInputs);
+
   const { email, password } = formInputs;
 
   const clearFormFields = () => {
@@ -23,10 +20,7 @@ function SignInForm() {
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userRef = await createUserDocumentFromAuth(user);
-
-    console.log(userRef);
+    await signInWithGooglePopup();
   };
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
@@ -39,9 +33,8 @@ function SignInForm() {
     event.preventDefault();
 
     try {
-      const response = await signAuthUserWithEmailAndPassword(email, password);
+      await signAuthUserWithEmailAndPassword(email, password);
       clearFormFields();
-      console.log(response);
     } catch (error: any) {
       if (error.code === 'auth/invalid-login-credentials') {
         alert('Invalid credentials');

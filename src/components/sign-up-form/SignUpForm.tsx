@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../services/firebase/firebase-utils';
-import FormInput from '../form-input/FormInput';
+import FormInput from '../UI/form-input/FormInput';
 import Button from '../UI/button/Button';
 import './sign-up-form-styles.scss';
 
@@ -33,7 +33,7 @@ function SignUpForm() {
 
       if (response) {
         const user = { ...response.user, displayName };
-        const userRef = await createUserDocumentFromAuth(user);
+        await createUserDocumentFromAuth(user);
       }
     } catch (error) {
       console.log(error);

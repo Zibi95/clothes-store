@@ -16,6 +16,7 @@ function FormInput({ label, ...attr }: FormInputProps) {
       <input
         className="form-input"
         {...attr}
+        id={attr.name}
       />
       {label && (
         <label

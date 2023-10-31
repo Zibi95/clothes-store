@@ -6,6 +6,10 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  NextOrObserver,
+  User,
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -49,6 +53,10 @@ export const signAuthUserWithEmailAndPassword = async (email: string, password: 
 
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+export const signOutUser = () => signOut(auth);
+
+export const onAuthStateChangeListener = (callback: NextOrObserver<User | null>) => onAuthStateChanged(auth, callback);
 
 // FIRESTORE
 export const db = getFirestore();
