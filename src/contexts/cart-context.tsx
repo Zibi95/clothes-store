@@ -9,7 +9,6 @@ type CartContextType = {
   addToCart: (product: CartItemType) => void;
   totalItemsInCart: number;
   decrementQuantity: (id: number) => void;
-  incrementQuantity: (id: number) => void;
   deleteCartItem: (id: number) => void;
 };
 
@@ -20,7 +19,6 @@ const CartContext = createContext<CartContextType>({
   addToCart: () => {},
   totalItemsInCart: 0,
   decrementQuantity: () => {},
-  incrementQuantity: () => {},
   deleteCartItem: () => {},
 });
 
@@ -49,7 +47,17 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
     setItems(aggregateCartItems(items, product));
   };
 
+  const deleteCartItem = (id: number) => {
+    setItems(items.filter(item => item.id !== id));
+  };
+
   const decrementQuantity = (id: number) => {
+    const curItem = items.find(item => item.id === id);
+    if (curItem?.quantity === 1) {
+      deleteCartItem(id);
+      return;
+    }
+
     setItems(
       items.map(item => {
         if (item.id === id) {
@@ -61,22 +69,6 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
     );
   };
 
-  const incrementQuantity = (id: number) => {
-    setItems(
-      items.map(item => {
-        if (item.id === id) {
-          ++item.quantity;
-        }
-
-        return item;
-      })
-    );
-  };
-
-  const deleteCartItem = (id: number) => {
-    setItems(items.filter(item => item.id !== id));
-  };
-
   const value = {
     isCartOpen,
     items,
@@ -84,7 +76,6 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
     addToCart,
     totalItemsInCart,
     decrementQuantity,
-    incrementQuantity,
     deleteCartItem,
   };
 
