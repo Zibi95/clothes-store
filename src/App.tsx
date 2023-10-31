@@ -4,6 +4,7 @@ import Home from './routes/home/Home';
 import NavigationBar from './routes/navigation/NavigationBar';
 import Authentication from './routes/authentication/Authentication';
 import Shop from './routes/shop/Shop';
+import Checkout from './routes/checkout/Checkout';
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
         <Route
           path="auth"
           element={<Authentication />}
+        />
+        <Route
+          path="checkout"
+          element={<Checkout />}
         />
       </Route>
     </Routes>

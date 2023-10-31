@@ -1,3 +1,4 @@
+import { useCart } from '../../contexts/cart-context';
 import { Product } from '../../types/product';
 import Button from '../UI/button/Button';
 import './product-card.style.scss';
@@ -7,7 +8,9 @@ type ProductCardProps = {
 };
 
 function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
   const { name, price, imageUrl } = product;
+
   return (
     <div className="product-card-container">
       <img
@@ -19,6 +22,7 @@ function ProductCard({ product }: ProductCardProps) {
         <span className="price">{price}</span>
       </div>
       <Button
+        onClick={() => addToCart(product)}
         type="button"
         buttonType="inverted">
         Add to cart
