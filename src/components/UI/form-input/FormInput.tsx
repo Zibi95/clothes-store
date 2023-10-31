@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from 'react';
-import './form-input-styles.scss';
+import './form-input.styles.scss';
 
 type FormInputProps = {
   label?: string;

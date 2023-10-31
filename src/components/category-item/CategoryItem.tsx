@@ -1,4 +1,4 @@
-import './category-styles.scss';
+import './category.styles.scss';
 
 type CategoryProps = {
   category: {

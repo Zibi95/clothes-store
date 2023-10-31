@@ -1,5 +1,5 @@
 import CategoryItem from '../category-item/CategoryItem';
-import './categories-styles.scss';
+import './categories.styles.scss';
 
 const categories = [
   {

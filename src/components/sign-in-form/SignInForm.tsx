@@ -2,7 +2,7 @@ import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 
 import FormInput from '../UI/form-input/FormInput';
 import Button from '../UI/button/Button';
-import './sign-in-form-styles.scss';
+import './sign-in-form.styles.scss';
 import { signInWithGooglePopup, signAuthUserWithEmailAndPassword } from '../../services/firebase/firebase-utils';
 
 const defaultFormInputs = {
