@@ -8,6 +8,7 @@ type CartContextType = {
   toggleCart: () => void;
   addToCart: (product: CartItemType) => void;
   totalItemsInCart: number;
+  totalCartPrice: number;
   decrementQuantity: (id: number) => void;
   deleteCartItem: (id: number) => void;
 };
@@ -18,6 +19,7 @@ const CartContext = createContext<CartContextType>({
   toggleCart: () => {},
   addToCart: () => {},
   totalItemsInCart: 0,
+  totalCartPrice: 0,
   decrementQuantity: () => {},
   deleteCartItem: () => {},
 });
@@ -38,6 +40,8 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
   const [items, setItems] = useState<CartItemType[]>([]);
 
   const totalItemsInCart = useMemo(() => items.reduce((acc, curr) => acc + curr.quantity, 0), [items]);
+
+  const totalCartPrice = useMemo(() => items.reduce((acc, curr) => acc + curr.quantity * curr.price, 0), [items]);
 
   const toggleCart = () => {
     setisCartOpen(prevState => !prevState);
@@ -75,6 +79,7 @@ export const CartContextProvider = ({ children }: PropsWithChildren) => {
     toggleCart,
     addToCart,
     totalItemsInCart,
+    totalCartPrice,
     decrementQuantity,
     deleteCartItem,
   };

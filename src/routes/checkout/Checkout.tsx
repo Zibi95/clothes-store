@@ -4,7 +4,7 @@ import { CartItemType } from '../../types/cartItem';
 import './checkout.styles.scss';
 
 function Checkout() {
-  const { items } = useCart();
+  const { items, totalCartPrice } = useCart();
 
   return (
     <div className="checkout-container">
@@ -31,7 +31,7 @@ function Checkout() {
           key={item.id}
         />
       ))}
-      <span className="total">Total: 0</span>
+      <span className="total">Total: ${totalCartPrice}</span>
     </div>
   );
 }
