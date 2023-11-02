@@ -1,6 +1,6 @@
 import { Product } from './product';
 
 export type Category = {
-  [key: string]: Product[];
+  [category: string]: Product[];
 };
 

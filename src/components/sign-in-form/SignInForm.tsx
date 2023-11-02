@@ -1,9 +1,9 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 
 import FormInput from '../UI/form-input/FormInput';
-import Button from '../UI/button/Button';
-import './sign-in-form.styles.scss';
+import Button, { ButtonTypes } from '../UI/button/Button';
 import { signInWithGooglePopup, signAuthUserWithEmailAndPassword } from '../../services/firebase/firebase-utils';
+import { SignInContainer, ControlsContainer } from './sign-in-form.styles';
 
 const defaultFormInputs = {
   email: '',
@@ -43,7 +43,7 @@ function SignInForm() {
   };
 
   return (
-    <div className="sign-in-container">
+    <SignInContainer>
       <h2>Already have an account?</h2>
       <span>Sign in</span>
       <form onSubmit={handleSubmit}>
@@ -63,17 +63,17 @@ function SignInForm() {
           type="password"
           required
         />
-        <div className="controls-container">
+        <ControlsContainer>
           <Button type="submit">Sign in</Button>
           <Button
-            buttonType="google"
+            buttonType={ButtonTypes.Google}
             type="button"
             onClick={signInWithGoogle}>
             Google sign in
           </Button>
-        </div>
+        </ControlsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 }
 

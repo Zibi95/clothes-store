@@ -6,7 +6,7 @@ type CartContextType = {
   isCartOpen: boolean;
   items: CartItemType[];
   toggleCart: () => void;
-  addToCart: (product: CartItemType) => void;
+  addToCart: (product: Product) => void;
   totalItemsInCart: number;
   totalCartPrice: number;
   decrementQuantity: (id: number) => void;

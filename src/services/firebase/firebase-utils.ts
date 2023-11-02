@@ -20,7 +20,6 @@ import {
   writeBatch,
   query,
   getDocs,
-  DocumentSnapshot,
   DocumentData,
 } from 'firebase/firestore';
 import { Category } from '../../types/category';
@@ -83,7 +82,6 @@ export const addCollectionAndDocuments = async (collectionKey: string, objectsTo
   });
 
   await batch.commit();
-  console.log('done');
 };
 
 export const getCategoriesAndDocuments = async (): Promise<Category> => {
@@ -91,15 +89,12 @@ export const getCategoriesAndDocuments = async (): Promise<Category> => {
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc: Category, docSnap: DocumentData) => {
+  return querySnapshot.docs.reduce((acc: Category, docSnap: DocumentData) => {
     const { title, items } = docSnap.data();
-
     acc[title.toLowerCase()] = items;
 
     return acc;
   }, {});
-
-  return categoryMap;
 };
 
 export const createUserDocumentFromAuth = async (userAuth: {

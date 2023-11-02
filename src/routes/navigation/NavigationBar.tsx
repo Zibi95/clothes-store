@@ -1,12 +1,12 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
-import './navigation.styles.scss';
 import { useUser } from '../../contexts/user-context';
 import { useCart } from '../../contexts/cart-context';
 import { signOutUser } from '../../services/firebase/firebase-utils';
 import CartIcon from '../../components/cart-icon/CartIcon';
 import CartDropdown from '../../components/cart-dropdown/CartDropdown';
+import { LogoContainer, NavigationContainer, NavLink, NavLinksContainer } from './navigation.styles';
 
 function NavigationBar() {
   const { currentUser } = useUser();
@@ -18,39 +18,31 @@ function NavigationBar() {
 
   return (
     <>
-      <div className="navigation">
-        <Link
-          to="/"
-          className="logo-container">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <CrwnLogo />
-        </Link>
-        <div className="nav-links-container">
-          <Link
-            className="nav-link"
-            to="shop">
-            SHOP
-          </Link>
+        </LogoContainer>
+        <NavLinksContainer>
+          <NavLink to="shop">SHOP</NavLink>
           {currentUser ? (
-            <span
+            <NavLink
               onClick={signOutHandler}
-              className="nav-link">
+              as="button"
+              to="">
               SIGN OUT
-            </span>
+            </NavLink>
           ) : (
-            <Link
-              className="nav-link"
-              to="auth">
-              SIGN IN
-            </Link>
+            <NavLink to="auth">SIGN IN</NavLink>
           )}
-          <span
+          <NavLink
             onClick={toggleCart}
-            className="nav-link">
+            as="span"
+            to="">
             <CartIcon />
-          </span>
-        </div>
+          </NavLink>
+        </NavLinksContainer>
         {isCartOpen && <CartDropdown />}
-      </div>
+      </NavigationContainer>
       <Outlet />
     </>
   );

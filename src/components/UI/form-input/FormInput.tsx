@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from 'react';
-import './form-input.styles.scss';
+import { Group, Input, InputLabel } from './form-input.styles';
 
 type FormInputProps = {
   label?: string;
@@ -12,20 +12,19 @@ type FormInputProps = {
 
 function FormInput({ label, ...attr }: FormInputProps) {
   return (
-    <div className="group">
-      <input
-        className="form-input"
+    <Group>
+      <Input
         {...attr}
         id={attr.name}
       />
       {label && (
-        <label
+        <InputLabel
           htmlFor={attr.name}
-          className={`${attr.value.length ? 'shrink' : ''} form-input-label`}>
+          $shrink={attr.value.length > 0}>
           {label}
-        </label>
+        </InputLabel>
       )}
-    </div>
+    </Group>
   );
 }
 

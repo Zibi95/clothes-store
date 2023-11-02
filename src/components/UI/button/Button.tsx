@@ -1,25 +1,28 @@
 import { PropsWithChildren } from 'react';
-import './button.styles.scss';
+import { BaseButton, GoogleButton, InvertedButton } from './button.styles';
+
+export enum ButtonTypes {
+  Base = 'base',
+  Google = 'google-sign-in',
+  Inverted = 'inverted',
+}
 
 type ButtonProps = {
-  buttonType?: 'google' | 'inverted';
+  buttonType?: ButtonTypes;
   type: 'button' | 'submit' | 'reset';
   onClick?: () => void;
 };
 
-const buttonTypes = {
-  google: 'google-sign-in',
-  inverted: 'inverted',
-};
+const getButton = (buttonType = ButtonTypes.Base) =>
+  ({
+    [ButtonTypes.Base]: BaseButton,
+    [ButtonTypes.Google]: GoogleButton,
+    [ButtonTypes.Inverted]: InvertedButton,
+  }[buttonType]);
 
 function Button({ children, buttonType, ...buttonAttr }: PropsWithChildren<ButtonProps>) {
-  return (
-    <button
-      {...buttonAttr}
-      className={`button-container ${buttonType ? buttonTypes[buttonType] : ''}`}>
-      {children}
-    </button>
-  );
+  const CustomButton = getButton(buttonType);
+  return <CustomButton {...buttonAttr}>{children}</CustomButton>;
 }
 
 export default Button;

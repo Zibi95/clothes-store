@@ -1,38 +1,38 @@
 import CheckoutItem from '../../components/checkout-item/CheckoutItem';
 import { useCart } from '../../contexts/cart-context';
 import { CartItemType } from '../../types/cartItem';
-import './checkout.styles.scss';
+import { CheckoutContainer, CheckoutHeader, HeaderBlock, TotalPrice } from './checkout.styles';
 
 function Checkout() {
   const { items, totalCartPrice } = useCart();
 
   return (
-    <div className="checkout-container">
-      <div className="checkout-header">
-        <div className="header-block">
+    <CheckoutContainer>
+      <CheckoutHeader>
+        <HeaderBlock>
           <span>Product</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Description</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Quantity</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Price</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Remove</span>
-        </div>
-      </div>
+        </HeaderBlock>
+      </CheckoutHeader>
       {items.map((item: CartItemType) => (
         <CheckoutItem
           item={item}
           key={item.id}
         />
       ))}
-      <span className="total">Total: ${totalCartPrice}</span>
-    </div>
+      <TotalPrice>Total: ${totalCartPrice}</TotalPrice>
+    </CheckoutContainer>
   );
 }
 

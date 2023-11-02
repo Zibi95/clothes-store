@@ -1,4 +1,4 @@
-import './category.styles.scss';
+import { BackgroundImage, CategoryBody, CategoryContainer } from './category.styles';
 
 type CategoryProps = {
   category: {
@@ -9,16 +9,13 @@ type CategoryProps = {
 
 function CategoryItem({ category: { title, imageUrl } }: CategoryProps) {
   return (
-    <div className="category-container">
-      <div
-        className="background-image"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      />
-      <div className="category-body-container">
+    <CategoryContainer to={`shop/${title}`}>
+      <BackgroundImage $imageUrl={imageUrl} />
+      <CategoryBody>
         <h2>{title}</h2>
         <p>Shop now</p>
-      </div>
-    </div>
+      </CategoryBody>
+    </CategoryContainer>
   );
 }
 
