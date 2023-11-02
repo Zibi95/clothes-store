@@ -1,24 +1,29 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
-import SHOP_DATA from '../shop-data.json';
+import { getCategoriesAndDocuments } from '../services/firebase/firebase-utils';
+import { Category } from '../types/category';
 import { Product } from '../types/product';
 
 type ProductsContextType = {
-  products: Product[];
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  products: Category;
+  setProducts: React.Dispatch<React.SetStateAction<Category>>;
+  allProducts: Product[];
 };
 
 const ProductsContext = createContext<ProductsContextType>({
-  products: [],
+  products: {},
   setProducts: () => {},
+  allProducts: [],
 });
 
 export const ProductsProvider = ({ children }: PropsWithChildren) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const value = { products, setProducts };
+  const [products, setProducts] = useState<Category>({});
 
   useEffect(() => {
-    setProducts(SHOP_DATA);
+    getCategoriesAndDocuments().then(categoryMap => setProducts(categoryMap));
   }, []);
+
+  const allProducts = ([] as Product[]).concat(...Object.values(products));
+  const value = { products, setProducts, allProducts };
 
   return <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>;
 };

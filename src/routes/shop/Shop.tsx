@@ -3,11 +3,11 @@ import { useProducts } from '../../contexts/products-context';
 import './shop.styles.scss';
 
 function Shop() {
-  const { products } = useProducts();
+  const { allProducts } = useProducts();
 
   return (
     <div className="products-container">
-      {products.map(product => (
+      {allProducts.map(product => (
         <ProductCard
           product={product}
           key={product.id}
