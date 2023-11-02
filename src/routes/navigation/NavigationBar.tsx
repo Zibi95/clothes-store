@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
 
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
-import { useUser } from '../../contexts/user-context';
-import { useCart } from '../../contexts/cart-context';
-import { signOutUser } from '../../services/firebase/firebase-utils';
 import CartIcon from '../../components/cart-icon/CartIcon';
 import CartDropdown from '../../components/cart-dropdown/CartDropdown';
+import { signOutUser } from '../../services/firebase/firebase-utils';
+import { useUser } from '../../contexts/user-context';
+import { useCart } from '../../contexts/cart-context';
 import { LogoContainer, NavigationContainer, NavLink, NavLinksContainer } from './navigation.styles';
 
 function NavigationBar() {
@@ -27,7 +27,7 @@ function NavigationBar() {
           {currentUser ? (
             <NavLink
               onClick={signOutHandler}
-              as="button"
+              as="span"
               to="">
               SIGN OUT
             </NavLink>
